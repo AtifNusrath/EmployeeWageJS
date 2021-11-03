@@ -8,7 +8,7 @@ const FULL_TIME_HRS = 8;
 const WAGE_PER_HR = 20;
 const IS_PRESENT = 1;
 const MAX_WORKING_DAYS = 20;
-
+const MAX_WORKING_HOURS = 160;
 
 /*let employeeCheck = Math.floor(Math.random() * 10 % 2);
 if (employeeCheck == IS_PRESENT) {
@@ -29,12 +29,14 @@ function getEmployeeWage(eCheck){
     }
 }
 let totalEmpHrs = 0;
-for (let day = 1; day <= MAX_WORKING_DAYS; day++) {
+let totalWorkigDays = 0;
+while (totalEmpHrs < MAX_WORKING_HOURS && totalWorkigDays < MAX_WORKING_DAYS) {
     let employeeCheck = Math.floor(Math.random() * 10) % 3;
     let emphrs = getEmployeeWage(employeeCheck);
     totalEmpHrs += emphrs;
-
+    totalWorkigDays++;
 }
 
 let totalEmpWage = totalEmpHrs * WAGE_PER_HR;
-console.log(" Total Employee Wage is: " + totalEmpWage + " for Total Employee Work Hours: " + totalEmpHrs);
+console.log(" Total Employee Wage is: " + totalEmpWage + " for Total Employee Work Hours: " + totalEmpHrs
++" Total Working Days: "+totalWorkigDays);
