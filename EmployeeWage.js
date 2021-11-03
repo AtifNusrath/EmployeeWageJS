@@ -7,16 +7,17 @@ const PART_TIME_HRS = 4;
 const FULL_TIME_HRS = 8;
 const WAGE_PER_HR = 20;
 const IS_PRESENT = 1;
-let employeeCheck = Math.floor(Math.random() * 10 % 2);
+
+/*let employeeCheck = Math.floor(Math.random() * 10 % 2);
 if (employeeCheck == IS_PRESENT) {
     console.log("Employee Is Present");
 } 
 else {
     console.log("Employee Is Absent");
-}
-let empCheck = Math.floor(Math.random() * 10 % 3);
+}*/
 let empHrs;
-    switch (empCheck) {
+function getEmployeeWage(eCheck){
+    switch (eCheck) {
         case IS_PART_TIME:
             empHrs = PART_TIME_HRS;
             break;
@@ -26,6 +27,8 @@ let empHrs;
         default:
             empHrs = 0;
     }
-    
+}
+let empCheck = Math.floor(Math.random() * 10 % 3);
+getEmployeeWage(empCheck);
     let empWage = empHrs * WAGE_PER_HR;
     console.log("Employee Wage is: "+empWage);
