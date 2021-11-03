@@ -13,6 +13,7 @@ let totalEmpHrs = 0;
 let totalWorkigDays = 0;
 let empDailyWageArray = new Array();
 let empDailyWageMap = new Map();
+let empDailyHrsAndWageArray = new Array();
 
 /*let employeeCheck = Math.floor(Math.random() * 10 % 2);
 if (employeeCheck == IS_PRESENT) {
@@ -36,15 +37,25 @@ function getEmployeeWage(eCheck){
 function calculateWage(empHrs) {
     return empHrs *  WAGE_PER_HR;
 }
-
+let day = 0;
 while (totalEmpHrs < MAX_WORKING_HOURS && totalWorkigDays < MAX_WORKING_DAYS) {
     totalWorkigDays++;
+    day++;
     let employeeCheck = Math.floor(Math.random() * 10) % 3;
     let emphrs = getEmployeeWage(employeeCheck);
     totalEmpHrs += emphrs;
-    empDailyWageArray.push(calculateWage(emphrs)); 
+    let dailyWage = calculateWage(emphrs)
+    empDailyWageArray.push(dailyWage); 
     empDailyWageMap.set(totalWorkigDays, calculateWage(emphrs));
+    let empWageObject = {
+        dayNumber: day,
+        dailyHrs: emphrs,
+        dailyWage: dailyWage
+    }
+    empDailyHrsAndWageArray.push(empWageObject);
 }
+
+//UC-10
 console.log(empDailyWageMap);
 function totalWages(totalWage, dailyWage){
     return totalWage+dailyWage;
@@ -173,3 +184,6 @@ const findTotal = (totalVal, dailyVal)=>{
     console. log("Full Working Days: "+fullWorkingDays);
     console. log("Part Working Days: "+partWorkingDays);
     console. log("Non Working Days: "+nonWorkingDays);
+
+    console.log("creating, Displaying The Object Stored in Array")
+console.log( empDailyHrsAndWageArray);
