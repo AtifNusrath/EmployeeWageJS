@@ -12,7 +12,7 @@ const MAX_WORKING_HOURS = 160;
 let totalEmpHrs = 0;
 let totalWorkigDays = 0;
 let empDailyWageArray = new Array();
-
+let empDailyWageMap = new Map();
 
 /*let employeeCheck = Math.floor(Math.random() * 10 % 2);
 if (employeeCheck == IS_PRESENT) {
@@ -43,8 +43,15 @@ while (totalEmpHrs < MAX_WORKING_HOURS && totalWorkigDays < MAX_WORKING_DAYS) {
     let emphrs = getEmployeeWage(employeeCheck);
     totalEmpHrs += emphrs;
     empDailyWageArray.push(calculateWage(emphrs)); 
-    
+    empDailyWageMap.set(totalWorkigDays, calculateWage(emphrs));
 }
+console.log(empDailyWageMap);
+function totalWages(totalWage, dailyWage){
+    return totalWage+dailyWage;
+}
+
+console.log("UC_8 - Emp Wage Mapp total Hrs : ",
+Array.from(empDailyWageMap.values()).reduce(totalWages,0));
 
 let empWage = calculateWage(totalEmpHrs);
 console.log("Daily Employee Wage stored in Array:\n"+empDailyWageArray);
