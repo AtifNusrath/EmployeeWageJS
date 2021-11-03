@@ -46,7 +46,92 @@ while (totalEmpHrs < MAX_WORKING_HOURS && totalWorkigDays < MAX_WORKING_DAYS) {
     
 }
 
-let totalEmpWage = calculateWage(totalEmpHrs);
+let empWage = calculateWage(totalEmpHrs);
 console.log("Daily Employee Wage stored in Array:\n"+empDailyWageArray);
-console.log(" Total Employee Wage is: " + totalEmpWage + " for Total Employee Work Hours: " + totalEmpHrs
+console.log(" Total Employee Wage is: " + empWage + " for Total Employee Work Hours: " + totalEmpHrs
 +" Total Working Days: "+totalWorkigDays);
+
+let totalEmpWage = 0;
+function sum(dailyWage) {
+    totalEmpWage += dailyWage;
+}
+empDailyWageArray.forEach(sum);
+console.log("\nUsing ForEach Loop, Total Wage: " + totalEmpWage);
+
+// UC 7A using Reduce Method
+let totalempWages = 0;
+function totalWages(totalempwages, dailyWage) {
+    return totalempwages + dailyWage;
+}
+let totalEmpWageUsingReduce = empDailyWageArray.reduce(totalWages, 0);
+console.log("\nUsing Reduce Method, Total Wage: " + totalEmpWageUsingReduce);
+
+// UC 7B Showing Day and DailyWage Using MAP helper function
+let counter = 0;
+function dayAndDailyWageMap(dailyWage) {
+    counter++;
+    return counter + " -> " + dailyWage;
+}
+let dayAndDailyWageMapArray = new Array();
+dayAndDailyWageMapArray = empDailyWageArray.map(dayAndDailyWageMap);
+console.log("\nUsing Map Printing Day with DailyWage.\n");
+console.log(dayAndDailyWageMapArray);
+
+/* UC 7C Showing/Storing  Only Full Time Wage =160 Earned Days in Array 
+* using Filter function/Method
+*/
+function fullTimeWageDay(dailyWage) {
+    return dailyWage.includes("160");
+}
+let fullTimeWageArray = dayAndDailyWageMapArray.filter(fullTimeWageDay);
+console.log("\nUsing Filter Storing Only FullTimewage into Array\n");
+console.log(fullTimeWageArray);
+
+//UC 7D  Finding first of Full Time Wage in Array using Find function
+let fullTimeWageFirstOccurance = dayAndDailyWageMapArray.find(fullTimeWageDay);
+console.log("\nfirst Occurence of Full Time Wage(160) 0n :\n");
+console.log(fullTimeWageFirstOccurance);
+
+// UC 7E Checking UC7C result Array Full time Wage Array , truly Holds Full timewage
+// Using Every function
+
+console.log("Is fulltimeWageArray truely holds fulltime Wage: "+fullTimeWageArray.every(fullTimeWageDay));
+
+/*
+ UC 7F Check for PartTime Wage in empWageDaily Array and Performing All other opertions too
+ */
+ function partTimeWageDay(dailyWage) {
+    return dailyWage.includes("80");
+}
+
+console.log("Checking for parttimeWage(80) in map Array Present or not:\n" + dayAndDailyWageMapArray.some(partTimeWageDay));
+// Storing only partTimeWage days in parttimeWagearray using Filter
+let partTimeWageArray = dayAndDailyWageMapArray.filter(partTimeWageDay);
+console.log("Part timeWage Days:\n" + partTimeWageArray);
+// checking parttimeWageArray truly holds Parttime totalWages
+console.log("Is parttimeWageArray truely holds Parttime Wage: " + partTimeWageArray.every(partTimeWageDay));
+let partTimeWageFirstOccurance = dayAndDailyWageMapArray.find(partTimeWageDay);
+console.log("\nfirst Occurence of Part Time Wage(80) 0n :");
+console.log(partTimeWageFirstOccurance);
+
+/* 
+* UC 7GFinding the Number of Days Employee Worked out Of 20Days
+*/
+
+function totalFullTimeWorked(numOfFullTimeDays, dailyWage) {
+    if (dailyWage == 160)
+        return numOfFullTimeDays + 1;
+    return numOfFullTimeDays;
+}
+function totalPartTimesWorked(numOfPartTimeDays, dailyWage) {
+    if (dailyWage == 80)
+        return numOfPartTimeDays + 1;
+    return numOfPartTimeDays;
+}
+
+let partTimeWorkedDays = empDailyWageArray.reduce(totalFullTimeWorked, 0);
+console.log("Employee Worked Part time for " + partTimeWorkedDays + " Days");
+let fullTimeWorkedDays = empDailyWageArray.reduce(totalPartTimesWorked, 0);
+console.log("Employee Worked Full time for " + fullTimeWorkedDays + " Days");
+let totalDaysWorked= fullTimeWorkedDays+partTimeWorkedDays;
+console.log("Employee Total Worked  for " + totalDaysWorked + " Days");
