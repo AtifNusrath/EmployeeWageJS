@@ -17,7 +17,13 @@ get name() {
      return this._name;
     }
     set name(name){
-        this._name=name;
+        let nameRegex=RegExp('^[A-Z]{1}[a-z]{3,}$');
+        if(nameRegex.test(name)) {
+            console.log('setting',name)
+             this._name=name;
+            }
+        else 
+            throw new Error ('Name is Incorrect');
     }
 
     toString(){
@@ -32,7 +38,11 @@ get name() {
 
 let employeePayrollData =new EmployeePayrollData(1,"Mark",30000);
 console.log(employeePayrollData.toString());
-employeePayrollData.name="John";
-console.log(employeePayrollData.toString());
+try{
+    employeePayrollData.name="John";
+    console.log(employeePayrollData.toString());
+}catch(e){
+    console.error(e);
+}
 let newEmployeePayrollData=new EmployeePayrollData(1,"Terrisa",30000,"F",new Date());
 console.log(newEmployeePayrollData);
